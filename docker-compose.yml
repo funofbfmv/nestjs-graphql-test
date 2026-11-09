@@ -1,3 +1,4 @@
+
 services:
   postgres:
     image: postgres:17-alpine
@@ -15,6 +16,21 @@ services:
       interval: 5s
       timeout: 5s
       retries: 10
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DATABASE_URL: postgresql://developer:developer@postgres:5432/developer_card?schema=public
+    depends_on:
+      postgres:
+        condition: service_healthy
 
 volumes:
   postgres_data:

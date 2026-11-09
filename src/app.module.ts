@@ -18,6 +18,7 @@ import { ProfileModule } from './profile/profile.module.js';
       path: '/graphql',
       autoSchemaFile: true,
       sortSchema: true,
+      introspection: true,
       graphiql: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
     }),
